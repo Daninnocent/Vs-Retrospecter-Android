@@ -75,6 +75,10 @@ class OptionsMenu extends MusicBeatState
 			new ResetScoreOption("Reset your score on all songs and weeks. This is irreversible!"),
 			new LockWeeksOption("Reset your story mode progress. This is irreversible!"),
 			new ResetSettings("Reset ALL your settings. This is irreversible!")
+		]),
+
+		new OptionCategory("Mobile settings", [
+			new CustomControls("Customise Your Controls For Your Android Device!")
 		])
 
 	];
@@ -128,6 +132,10 @@ class OptionsMenu extends MusicBeatState
 		FlxTween.tween(blackBorder,{y: FlxG.height - 18},2, {ease: FlxEase.elasticInOut});
 
 		changeSelection();
+
+		#if mobileC
+		addVirtualPad(UP_DOWN, A_B);
+		#end
 
 		super.create();
 	}

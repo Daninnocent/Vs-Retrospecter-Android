@@ -44,21 +44,23 @@ class TitleState extends MusicBeatState
 		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod']});
 		#end
 
-		#if sys
+		/*#if sys
 		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets/replays"))
 		{
 			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/replays");
 		}
-		#end
+		#end*/
 
 		// (tsg) this is stupid, i don't know how i was given approval to do this, but here's the coconut
-		if (sys.FileSystem.exists("assets/images/coconut.png") == false)
+		/*if (sys.FileSystem.exists("assets/images/coconut.png") == false)
 		{
 			// (tsg) allow hell to break loose
 
 			// (tsg) exit game
 			System.exit(0);
-		}
+		}*/
+
+		//removing this because it won't work on android sorry :(
 
 		#if windows
 		DiscordClient.initialize();
@@ -316,6 +318,14 @@ class TitleState extends MusicBeatState
 		}
 
 		var pressedEnter:Bool = controls.ACCEPT;
+
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed)
+			{
+				pressedEnter = true;
+			}
+		}
 
 		if (pressedEnter && !transitioning && skippedIntro)
 		{

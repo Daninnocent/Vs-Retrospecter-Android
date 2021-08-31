@@ -377,6 +377,10 @@ class CreditsState extends MusicBeatState
 
 		updateQuote();
 
+		#if mobileC
+		addVirtualPad(FULL, A_B);
+		#end
+
 		super.create();
 	}
 

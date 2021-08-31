@@ -11,6 +11,7 @@ import flixel.util.FlxColor;
 import haxe.Exception;
 import lime.app.Application;
 import openfl.display.BitmapData;
+import ui.FlxVirtualPad;
 
 using StringTools;
 
@@ -23,6 +24,8 @@ import sys.io.File;
 
 class ResultsScreen extends FlxSubState
 {
+    var virtualpad:FlxVirtualPad;
+
     public var background:FlxSprite;
     public var text:FlxText;
 
@@ -162,6 +165,9 @@ class ResultsScreen extends FlxSubState
         cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 		cameras[0].angle = 0;
 
+        virtualpad = new FlxVirtualPad(NONE, A_B);
+		add(virtualpad);
+
 		super.create();
 	}
 
@@ -172,7 +178,7 @@ class ResultsScreen extends FlxSubState
 
         // keybinds
 
-        if (PlayerSettings.player1.controls.ACCEPT)
+        if (virtualpad.buttonA.justPressed)
         {
             music.fadeOut(0.3);
 

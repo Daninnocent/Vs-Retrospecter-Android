@@ -7,6 +7,7 @@ import flixel.system.FlxSound;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.FlxCamera;
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -193,6 +194,13 @@ class GameOverSubstate extends MusicBeatSubstate
 		FlxG.camera.target = null;
 
 		bf.playAnim('firstDeath');
+		#if mobileC
+		addVirtualPad(NONE, A_B);
+		var camcontrol = new FlxCamera();
+		FlxG.cameras.add(camcontrol);
+		camcontrol.bgColor.alpha = 0;
+		_virtualpad.cameras = [camcontrol];	
+		#end
 		if (daBf == 'bf-wrath-death')
 		{
 			bf.animation.finishCallback = function(str:String)
@@ -272,6 +280,7 @@ class GameOverSubstate extends MusicBeatSubstate
 				}
 			}
 		}
+		
 
 		// (Arcy) No Fail mode unlock
 		if (!StoryMenuState.modeUnlocked[1])

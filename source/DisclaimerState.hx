@@ -9,11 +9,14 @@ import flixel.tweens.FlxTween;
 import flixel.ui.FlxBar;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import ui.FlxVirtualPad;
 
 using StringTools;
 
 class DisclaimerState extends FlxState
 {
+    var virtualpad:FlxVirtualPad;
+
     var selectSprite:FlxSprite;
     var isFlashing:Bool = true;
     var barProgress:Float = 0;
@@ -109,6 +112,9 @@ class DisclaimerState extends FlxState
         FileCache.loadFiles();
         updateLoadingText();
 
+        virtualpad = new FlxVirtualPad(LEFT_RIGHT, A_B);
+		add(virtualpad);
+
 		super.create();
 	}
 
@@ -127,7 +133,7 @@ class DisclaimerState extends FlxState
 				remove(loadingImage);
             }
 
-            if (!disclaimer && (FlxG.keys.justPressed.ENTER || PlayerSettings.player1.controls.ACCEPT))
+            if (!disclaimer && (virtualpad.buttonA.justPressed || PlayerSettings.player1.controls.ACCEPT))
             {
 				if (firstPass)
 				{
@@ -149,19 +155,19 @@ class DisclaimerState extends FlxState
             }
             else if (disclaimer && !stopspamming)
             {
-                if ((FlxG.keys.justPressed.LEFT || PlayerSettings.player1.controls.LEFT_P) && selectSprite.x == 660)
+                if ((virtualpad.buttonLeft.justPressed || PlayerSettings.player1.controls.LEFT_P) && selectSprite.x == 660)
                 {
                     FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
                     selectSprite.x = 460;
                     isFlashing = true;
                 }
-                else if ((FlxG.keys.justPressed.RIGHT || PlayerSettings.player1.controls.RIGHT_P) && selectSprite.x == 460)
+                else if ((virtualpad.buttonRight.justPressed || PlayerSettings.player1.controls.RIGHT_P) && selectSprite.x == 460)
                 {
                     FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
                     selectSprite.x = 660;
                     isFlashing = false;
                 }
-                else if (FlxG.keys.justPressed.ENTER || PlayerSettings.player1.controls.ACCEPT)
+                else if (virtualpad.buttonA.justPressed || PlayerSettings.player1.controls.ACCEPT)
                 {
                     FlxG.save.data.flashing = isFlashing;
                     FlxG.save.data.chrom = isFlashing;

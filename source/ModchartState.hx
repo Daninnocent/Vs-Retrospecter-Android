@@ -3,7 +3,6 @@
 // Lua
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
-#if windows
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.tweens.FlxEase;
@@ -709,8 +708,8 @@ class ModchartState
 				});
 
 				Lua_helper.add_callback(lua,"setWindowPos",function(x:Int,y:Int) {
-					Application.current.window.x = x;
-					Application.current.window.y = y;
+					//Application.current.window.x = x;
+					//Application.current.window.y = y;
 				});
 
 				Lua_helper.add_callback(lua,"getWindowX",function() {
@@ -722,7 +721,7 @@ class ModchartState
 				});
 
 				Lua_helper.add_callback(lua,"resizeWindow",function(Width:Int,Height:Int) {
-					Application.current.window.resize(Width,Height);
+					//Application.current.window.resize(Width,Height);
 				});
 
 				Lua_helper.add_callback(lua,"getScreenWidth",function() {
@@ -917,4 +916,3 @@ class ModchartState
         return new ModchartState();
     }
 }
-#end
