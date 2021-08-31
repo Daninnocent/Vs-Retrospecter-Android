@@ -78,7 +78,7 @@ class Main extends Sprite
 		}
 
 		#if debug
-		initialState = TitleState;
+		initialState = DisclaimerState;
 		#end
 
 		#if android
